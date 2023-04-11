@@ -12,7 +12,9 @@ public class Main {
 
         System.out.println("Please enter stack size:");
         int stackSize = scanner.nextInt();
-        StackArray stacky = new StackArray(stackSize);
+        StackArray<Integer> stacky = new StackArray<>(stackSize);
+        //StackArray<Integer> stacky = new StackArray<Integer>(stackSize); we can leave the second "<>" void
+        //because is already specified in the first "<>".
 
         System.out.println("Please enter some numbers, enter negative number for stopping the prompt:");
         int key = scanner.nextInt();
