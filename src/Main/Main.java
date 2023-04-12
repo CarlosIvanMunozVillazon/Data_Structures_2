@@ -1,32 +1,52 @@
 package Main;
 
-import StackWithArray.StackArray;
-
-import java.util.Scanner;
+import DoublyLinkedList.DoublyLinkedList;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+        DoublyLinkedList myList = new DoublyLinkedList();
 
-        System.out.println("Please enter stack size:");
-        int stackSize = scanner.nextInt();
-        StackArray<Integer> stacky = new StackArray<>(stackSize);
-        //StackArray<Integer> stacky = new StackArray<Integer>(stackSize); we can leave the second "<>" void
-        //because is already specified in the first "<>".
+        myList.pushBack(1.2,3.6);
+        myList.pushBack(3.4,4.5);
+        myList.pushBack(9.6,12.3);
+        myList.pushBack(23.5,15.2);
 
-        System.out.println("Please enter some numbers, enter negative number for stopping the prompt:");
-        int key = scanner.nextInt();
-        while(key > 0){
-            stacky.push(key);
-            key = scanner.nextInt();
-        }
+        myList.printDoublyLinkedList();
 
-        while(!stacky.empty()){
-            System.out.print(stacky.pop() + " ");
-        }
+        double [] returnArray = myList.topFront();
+        System.out.print(returnArray[0] + " " + returnArray[1]);
 
-        scanner.close();
+        myList.popFront();
+
+        System.out.println();
+        System.out.println();
+
+        myList.printDoublyLinkedList();
+
+        //Test for the insert method
+
+        DoublyLinkedList myList2 = new DoublyLinkedList();
+
+        myList2.pushBack(3,23);
+        myList2.pushBack(9,23);
+
+        myList2.printDoublyLinkedList();
+
+        myList2.insert(1,32);
+        myList2.printDoublyLinkedList();
+
+        myList2.insert(7,45);
+        myList2.printDoublyLinkedList();
+
+        myList2.insert(11,334);
+        myList2.printDoublyLinkedList();
+
+        DoublyLinkedList myList3 = new DoublyLinkedList();
+
+        myList3.insert(23,11);
+        myList3.printDoublyLinkedList();
+
     }
 }
