@@ -1,11 +1,32 @@
 package Main;
 
 import DoublyLinkedList.DoublyLinkedList;
+import LinkedLIstWithTail.LinkedListWithTail;
 
 public class Main {
 
     public static void main(String[] args) {
 
+        //SINGLY GENERIC LINKED LIST WITH TAIL TESTING
+
+        LinkedListWithTail <Integer> myList = new LinkedListWithTail<>();
+
+        myList.pushBack(1);
+        myList.pushBack(2);
+        myList.pushBack(3);
+        myList.pushBack(4);
+
+        myList.printLinkedListWithTail();
+
+        System.out.println(myList.topFront());
+
+        myList.popFront();
+
+        myList.printLinkedListWithTail();
+
+
+        //DOUBLY LINKED LIST TESTING
+        /*
         DoublyLinkedList myList = new DoublyLinkedList();
 
         myList.pushBack(1.2,3.6);
@@ -47,6 +68,7 @@ public class Main {
 
         myList3.insert(23,11);
         myList3.printDoublyLinkedList();
+*/
 
     }
 }
