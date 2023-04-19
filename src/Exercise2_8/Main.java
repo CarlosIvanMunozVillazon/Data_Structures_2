@@ -42,7 +42,7 @@ public class Main {
         servidores[1] = servidor2;
         servidores[2] = servidor3;
 
-        ListaDeEventos.insert(randomExponential(0.1),1,-1); //agendo la primera llegada
+        ListaDeEventos.insert(randomExponential(6),1,-1); //agendo la primera llegada
 
         do {
 
@@ -70,7 +70,7 @@ public class Main {
 
         double n = random.nextDouble();
 //        double k = Math.random()/Math.nextDown(1.0);
-        return (-1 * (mean * Math.log(1-n)));
+        return (-1 * (mean * Math.log(n)));
     }
 
     public static void timing() {
@@ -97,7 +97,7 @@ public class Main {
 
     public static void llegada (){
 
-        ListaDeEventos.insert(randomExponential(0.1), 1, -1); //agendo una nueva llegada
+        ListaDeEventos.insert(randomExponential(6), 1, -1); //agendo una nueva llegada
 
         int i = 0;
         while (i < 3 && !servidores[i].isEmpty()){ //miro si hay servidores libres
@@ -117,7 +117,7 @@ public class Main {
 
             totalDeDemoras += demoraEnCola; //incremento el total de demoras
 
-            ListaDeEventos.insert(randomExponential(0.25),2,servidorSalida); //agendo un evento de terminacion
+            ListaDeEventos.insert(randomExponential(15),2,servidorSalida); //agendo un evento de terminacion
             //de servicio para la transaccion que estoy atendiendo
 
             FilaTransacciones.popFront(); //elimino el primer elemento que esté en la fila de transacciones por que ya lo estoy
@@ -143,7 +143,7 @@ public class Main {
             FilaTransacciones.popFront(); //elimino el primer elemento de la fila de transacciones por que ya lo guardé
             //en un servidor.
 
-            ListaDeEventos.insert(randomExponential(0.25),2,servidorSalida); //agendo una terminacion del servicio
+            ListaDeEventos.insert(randomExponential(15),2,servidorSalida); //agendo una terminacion del servicio
             //para este servidor.
 
         }
