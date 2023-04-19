@@ -2,6 +2,7 @@ package Main;
 
 import DoublyLinkedList.DoublyLinkedList;
 import LinkedLIstWithTail.LinkedListWithTail;
+import StackWithArray.StackArray;
 
 public class Main {
 
@@ -23,6 +24,18 @@ public class Main {
         myList.popFront();
 
         myList.printLinkedListWithTail();
+
+        //STACK ARRAY PRINT METHOD TESTING:
+
+        StackArray <Integer> myStack = new StackArray<>(4);
+
+        myStack.push(1);
+        myStack.push(2);
+        myStack.push(3);
+        myStack.push(4);
+
+        myStack.printStackRegularOrder();
+        myStack.printStackReverseOrder();
 
 
         //DOUBLY LINKED LIST TESTING
