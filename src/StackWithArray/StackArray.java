@@ -45,12 +45,28 @@ public class StackArray<T> {
     public void printStackRegularOrder() {
 
         if (empty()) {
-            System.out.println("[]");
+            System.out.print("[]");
         } else {
-            for (T key : sarray) {
+            System.out.print("[" + sarray[0]);
+            /*for (T key : sarray) {
                 System.out.print(key + " ");
+            }*/
+
+
+            for (int i = 1; i < sarray.length; i++) {
+
+                if (sarray[i] != null) {
+                    System.out.print(" " + sarray[i]);
+                }
+
+
             }
-            System.out.println();
+            /*if (sarray[sarray.length-1] != null){
+                System.out.print(sarray[sarray.length-1]);
+            }*/
+
+            System.out.print("]");
+
         }
     }
 
