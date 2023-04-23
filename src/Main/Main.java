@@ -2,15 +2,44 @@ package Main;
 
 import DoublyLinkedList.DoublyLinkedList;
 import LinkedLIstWithTail.LinkedListWithTail;
+import QueueWithArray.QueueArray;
 import StackWithArray.StackArray;
 
 public class Main {
 
     public static void main(String[] args) {
 
+        //QUEUE WITH ARRAY IMPLEMENTATION TESTING:
+
+        QueueArray <String> queueOfStrings = new QueueArray<>(5);
+
+        queueOfStrings.enqueue("Roger");
+        queueOfStrings.enqueue("Arthur");
+        queueOfStrings.enqueue("Magnus");
+        queueOfStrings.enqueue("Irving");
+        queueOfStrings.enqueue("Andy");
+
+        queueOfStrings.printQueueArray();
+
+        queueOfStrings.dequeue();
+
+        queueOfStrings.printQueueArray();
+
+        queueOfStrings.enqueue("Armin");
+
+        queueOfStrings.printQueueArray();
+
+        queueOfStrings.dequeue();
+        queueOfStrings.dequeue();
+
+        queueOfStrings.printQueueArray();
+        System.out.println(queueOfStrings.getFront());
+        System.out.println(queueOfStrings.getRear());
+
+
         //SINGLY GENERIC LINKED LIST WITH TAIL TESTING
 
-        LinkedListWithTail <Integer> myList = new LinkedListWithTail<>();
+/*        LinkedListWithTail <Integer> myList = new LinkedListWithTail<>();
 
         myList.pushBack(1);
         myList.pushBack(2);
@@ -23,19 +52,21 @@ public class Main {
 
         myList.popFront();
 
-        myList.printLinkedListWithTail();
+        myList.printLinkedListWithTail();*/
 
         //STACK ARRAY PRINT METHOD TESTING:
 
+/*
         StackArray <Integer> myStack = new StackArray<>(4);
+*/
 
-        myStack.push(1);
+/*        myStack.push(1);
         myStack.push(2);
         myStack.push(3);
         myStack.push(4);
 
         myStack.printStackRegularOrder();
-        myStack.printStackReverseOrder();
+        myStack.printStackReverseOrder();*/
 
 
         //DOUBLY LINKED LIST TESTING
