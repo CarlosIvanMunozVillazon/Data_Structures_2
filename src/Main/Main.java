@@ -20,8 +20,14 @@ public class Main {
         queueOfStrings.enqueue("Andy");
 
         queueOfStrings.printQueueArray();
+        System.out.println(queueOfStrings.getRear());
+        System.out.println(queueOfStrings.getFront());
 
+        System.out.println("//////////////");
         queueOfStrings.dequeue();
+        System.out.println(queueOfStrings.getRear());
+        System.out.println(queueOfStrings.getFront());
+
 
         queueOfStrings.printQueueArray();
 
