@@ -220,7 +220,7 @@ public class Main {
         double costoGeneral = costoTotalDeServicio + costoDeEspera;
 
         System.out.println("REPORTE: ");
-        System.out.println("La demora promedio en cola es: " + (promedioDemoraEnCola / 60));
+        System.out.println("La demora promedio en cola es: " + promedioDemoraEnCola);
         System.out.println("El numero promedio de transacciones en cola es: " + promedioDeTransaccionesEnCola);
         System.out.println("La utilizacion promedio global de los servidores es: " + utilizacionPromedioTotalDeServidores);
         System.out.println("Costo total de espera: -" + costoDeEspera);
