@@ -28,7 +28,7 @@ public class ListaEnlazadaConCola {
         return (cabeza == null && cola == null);
     }
 
-    public void pushBack(double tiempoDeLlegada) { //introduce atrás los nuevos elementos
+    public void pushBack(double tiempoDeLlegada) { //introduce atrás los nuevos elementos, es decir que los encola.
         Nodo nuevoNodo = new Nodo(tiempoDeLlegada);
         if (isEmpty()) {
             cabeza = nuevoNodo;
@@ -47,7 +47,7 @@ public class ListaEnlazadaConCola {
         }
     }
 
-    public double topFront() {
+    public double topFront() { // retorna el dato que está al principio de la lista
         if (isEmpty()) {
             throw new RuntimeException("The linked list is empty.");
         } else {
@@ -55,7 +55,7 @@ public class ListaEnlazadaConCola {
         }
     }
 
-    public void popFront() {
+    public void popFront() { // elimina el nodo que está al principio de la lista
 
         if(isEmpty()){
             throw new RuntimeException("The linked list is empty.");
@@ -83,5 +83,6 @@ public class ListaEnlazadaConCola {
 
     public int getTamanho() {
         return this.tamanho;
-    }
+    } // retorna el tamaño de la lista, es decir la cantidad de elementos
+    //que lleva
 }

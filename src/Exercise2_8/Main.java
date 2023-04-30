@@ -2,8 +2,8 @@ package Exercise2_8;
 
 import java.security.SecureRandom;
 import java.util.Random;
-import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.Scanner;
 
 public class Main {
     //Funcionamiento de la simulación
@@ -19,7 +19,6 @@ public class Main {
     static double areaServidor1;
     static double areaServidor2;
     static double areaServidor3;
-    static double costoDeEsperaComparable;
 
 
     //Listas pertinentes
@@ -36,23 +35,24 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         //Media de llegadas = 0.1 hora / transacción -> 1/600 hora transaccion
-        //Hay tres servidores. Cada uno de los cuales, procesa
-        //Tiempo medio de servicio = 15 min / transacción
+        //Hay tres servidores. Cada uno de los cuales, procesa con un tiempo medio de servicio de
+        //15 min / transacción
 
         servidores[0] = servidor1;
         servidores[1] = servidor2;
         servidores[2] = servidor3;
 
-        ListaDeEventos.insert(randomExponential(6), 1, -1); //agendo la primera llegada
+        ListaDeEventos.insert(randomExponential(6), 1, -1); //Agendo la primera llegada, con
+        //servidor = -1, por que no se que servidor se va a desocupar primero.
 
         do {
 
-            timing(); //determina el tipo del siguiente evento, avanza el reloj de simulación, elimina el primer registro de la lista
+            timing(); //Determina el tipo del siguiente evento, avanza el reloj de simulación, elimina el primer registro de la lista
             //de eventos.
-            //NOTA: Es mejor utilizar medias en decimal para las distribuciones de probabilidad.
+
             switch (tipoDeSiguienteEvento) {
                 case 1 -> llegada();
-                case 2 -> salida();//terminación del servicio
+                case 2 -> salida();//Terminación del servicio
             }
 
         } while (relojDeSimulacion <= 480);
@@ -62,7 +62,7 @@ public class Main {
             timing2();
 
             if (tipoDeSiguienteEvento == 2) {
-                salida();//terminación del servicio
+                salida();
             }
 
         } while (!FilaTransacciones.isEmpty());
@@ -73,15 +73,15 @@ public class Main {
     }
 
     public static double randomExponential(double mean) {
-        /*Random randomNumber = new Random();
-        double u = randomNumber.nextDouble();*/
+//        Random randomNumber = new Random();
+//        double u = randomNumber.nextDouble();
 
-//        double r = ThreadLocalRandom.current().nextDouble(1.00000000000000000001);
-        SecureRandom random = new SecureRandom();
+        double r = ThreadLocalRandom.current().nextDouble(1.000000000000001);
+//        SecureRandom random = new SecureRandom();
 
-        double n = random.nextDouble();
+//        double n = random.nextDouble();
 //        double k = Math.random()/Math.nextDown(1.0);
-        return (-1 * (mean * Math.log(n)));
+        return (-1 * (mean * Math.log(r)));
     }
 
     public static void timing() {
@@ -110,14 +110,8 @@ public class Main {
 
         double[] evento = ListaDeEventos.topFront();
 
-        /* Para sustentar
-        double tiempoUltimoEvento = relojDeSimulacion;
-        double tiempoEventoSiguiente = relojDeSimulacion + evento[0];
-
-        double tiempoDesdeElUltimoEvento = tiempoEventoSiguiente - tiempoUltimoEvento;
-        */
-
         if ((int) evento[1] == 2) {
+
             relojDeSimulacion += evento[0];
             tipoDeSiguienteEvento = (int) evento[1];
             servidorSalida = (int) evento[2];
@@ -127,60 +121,61 @@ public class Main {
 
         }
 
-
         ListaDeEventos.popFront();
 
     }
 
     public static void llegada() {
 
-        ListaDeEventos.insert(randomExponential(6), 1, -1); //agendo una nueva llegada
+        ListaDeEventos.insert(randomExponential(6), 1, -1); //Agendo una nueva llegada
 
         int i = 0;
-        while (i < 3 && !servidores[i].isEmpty()) { //miro si hay servidores libres
+        while (i < 3 && !servidores[i].isEmpty()) { //Miro si hay servidores libres
             i++;
         }
 
-        if (i >= 3) { // si no hay servidores libres, hago que la transaccion espere en cola
-            FilaTransacciones.pushBack(relojDeSimulacion);
-        } else { // si hay servidores libres
-            FilaTransacciones.pushBack(relojDeSimulacion);
-            servidorSalida = i;
-            servidores[servidorSalida].pushBack(relojDeSimulacion); //ocupo el servidor que esté libre
+        FilaTransacciones.pushBack(relojDeSimulacion); // Pongo a hacer cola la transaccion que llega
 
-            double tiempoDeLlegada = FilaTransacciones.topFront(); //tomo el tiempo de llegada de la primera transaccion
-            //que esté en la fila
-            double demoraEnCola = relojDeSimulacion - tiempoDeLlegada; //calculo la demora en cola de esa transaccion
+        if (i < 3) { //Si hay servidores libres, paso la transaccion a ser atendida
+            double tiempoDeLlegada = FilaTransacciones.topFront(); //Tomo el tiempo de llegada de la primera transaccion
+            //que está haciendo cola
 
-            totalDeDemoras += demoraEnCola; //incremento el total de demoras
+            servidorSalida = i; //Establezco el servidor que va a ser ocupado
+            servidores[servidorSalida].pushBack(tiempoDeLlegada); //Ocupo el servidor
 
-            ListaDeEventos.insert(randomExponential(15), 2, servidorSalida); //agendo un evento de terminacion
+            double demoraEnCola = relojDeSimulacion - tiempoDeLlegada; //Calculo la demora en cola de la transaccion
+
+            totalDeDemoras += demoraEnCola; //Incremento el total de demoras
+
+            ListaDeEventos.insert(randomExponential(15), 2, servidorSalida); //Agendo un evento de terminacion
             //de servicio para la transaccion que estoy atendiendo
 
-            FilaTransacciones.popFront(); //elimino el primer elemento que esté en la fila de transacciones por que ya lo estoy
+            FilaTransacciones.popFront(); //Elimino el primer elemento que esté en la fila de transacciones por que ya lo estoy
             //atendiendo en el servidor
         }
+
+        //si no hay servidores libres, no hago nada.
 
     }
 
     public static void salida() {
 
-        servidores[servidorSalida].popFront(); //desocupo el servidor
+        servidores[servidorSalida].popFront(); //Desocupo el servidor
         transaccionesAtendidas++; //Incremento el numero de transacciones atendidas
 
         if (!FilaTransacciones.isEmpty()) { //Si la fila de transacciones no está vacia
 
             double tiempoDeLlegada = FilaTransacciones.topFront(); //Tomo el tiempo de llegada de la primera transaccion en la fila
 
-            servidores[servidorSalida].pushBack(tiempoDeLlegada); //Ocupo el servidor que dejo libre en la linea 109
+            servidores[servidorSalida].pushBack(tiempoDeLlegada); //Ocupo el servidor que previamente dejo libre.
             double demoraEnCola = relojDeSimulacion - tiempoDeLlegada; //Calculo la demora en cola
 
-            totalDeDemoras += demoraEnCola; //aumento el acumulador de demoras
+            totalDeDemoras += demoraEnCola; //Actualizo el acumulador de demoras
 
-            FilaTransacciones.popFront(); //elimino el primer elemento de la fila de transacciones por que ya lo guardé
+            FilaTransacciones.popFront(); //Elimino el primer elemento de la fila de transacciones por que ya lo guardé
             //en un servidor.
 
-            ListaDeEventos.insert(randomExponential(15), 2, servidorSalida); //agendo una terminacion del servicio
+            ListaDeEventos.insert(randomExponential(15), 2, servidorSalida); //Agendo una terminacion del servicio
             //para este servidor.
 
         }
@@ -193,7 +188,7 @@ public class Main {
         if (servidores[0].isEmpty()) {
             areaServidor1 += 0;
         } else {
-            areaServidor1 += tiempoParaArea; //se puede multiplicar por 1 que es cuando el servidor está ocupado.
+            areaServidor1 += tiempoParaArea; //Se puede multiplicar por 1 que es cuando el servidor está ocupado.
         }
 
         if (servidores[1].isEmpty()) {
@@ -227,14 +222,12 @@ public class Main {
         double costoGeneral = costoTotalDeServicio + costoDeEspera;
 
         System.out.println("REPORTE: ");
-        System.out.println("La demora promedio en cola es: " + promedioDemoraEnCola);
-        System.out.println("El numero promdeio de transacciones en cola es: " + promedioDeTransaccionesEnCola);
+        System.out.println("La demora promedio en cola es: " + (promedioDemoraEnCola / 60));
+        System.out.println("El numero promedio de transacciones en cola es: " + promedioDeTransaccionesEnCola);
         System.out.println("La utilizacion promedio global de los servidores es: " + utilizacionPromedioTotalDeServidores);
-        System.out.println("Cantidad de transacciones procesadas: " + transaccionesAtendidas);
         System.out.println("Costo total de espera: -" + costoDeEspera);
         System.out.println("Costo total de los servidores: -" + costoTotalDeServicio);
         System.out.println("Costos totales: -" + costoGeneral);
-        System.out.println("Hora de salida de servicio: " + relojDeSimulacion);
 
     }
 }
