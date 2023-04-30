@@ -1,4 +1,4 @@
-package Exercise2_8;
+package Ejercicio28;
 
 public class ListaEnlazadaConCola {
 

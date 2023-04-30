@@ -1,7 +1,5 @@
-package Exercise2_8;
+package Ejercicio28;
 
-import java.security.SecureRandom;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.Scanner;
 
