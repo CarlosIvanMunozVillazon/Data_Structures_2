@@ -42,7 +42,7 @@ public class Main2 {
 
         } while (relojDeSimulacion <= 480); //Pasadas 8 horas no se reciben nuevas transacciones
 
-        do {
+        /*do {
 
             timing2();
 
@@ -51,7 +51,7 @@ public class Main2 {
             }
 
         } while (!FilaTransacciones.isEmpty()); //Se atiende hasta que no hayan transacciones en la cola
-
+*/
         reporte();
 
         scanner.close();

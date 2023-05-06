@@ -1,5 +1,6 @@
 package Main;
 
+import BST.BinaryTree;
 import DoublyLinkedList.DoublyLinkedList;
 import LinkedLIstWithTail.LinkedListWithTail;
 import QueueWithArray.QueueArray;
@@ -9,8 +10,23 @@ public class Main {
 
     public static void main(String[] args) {
 
+
+        //BINARY TREE IMPLEMENTATION TESTING:
+
+        BinaryTree newTree = new BinaryTree();
+
+        newTree.insertDriver(5);
+        newTree.insertDriver(8);
+        newTree.insertDriver(1);
+        newTree.insertDriver(3);
+        newTree.insertDriver(6);
+        newTree.insertDriver(0);
+        newTree.insertDriver(10);
+        newTree.insertDriver(10);
+
         //QUEUE WITH ARRAY IMPLEMENTATION TESTING:
 
+/*
         QueueArray <String> queueOfStrings = new QueueArray<>(5);
 
         queueOfStrings.enqueue("Roger");
@@ -41,6 +57,7 @@ public class Main {
         queueOfStrings.printQueueArray();
         System.out.println(queueOfStrings.getFront());
         System.out.println(queueOfStrings.getRear());
+*/
 
 
         //SINGLY GENERIC LINKED LIST WITH TAIL TESTING
