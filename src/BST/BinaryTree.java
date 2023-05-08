@@ -2,7 +2,7 @@ package BST;
 
 public class BinaryTree {
 
-    private class Node {
+    private static class Node {
 
         private Node left;
         private int data;
