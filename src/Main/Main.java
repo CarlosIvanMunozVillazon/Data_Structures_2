@@ -15,14 +15,19 @@ public class Main {
 
         BinaryTree newTree = new BinaryTree();
 
-        newTree.insertDriver(5);
-        newTree.insertDriver(8);
-        newTree.insertDriver(1);
-        newTree.insertDriver(3);
-        newTree.insertDriver(6);
-        newTree.insertDriver(0);
-        newTree.insertDriver(10);
-        newTree.insertDriver(10);
+        newTree.insertData(5);
+        System.out.println(newTree.getSize());
+
+        newTree.insertData(1);
+        newTree.insertData(3);
+        newTree.insertData(7);
+        newTree.insertData(6);
+
+        System.out.println(newTree.getSize());
+
+        newTree.printInOrder();
+        newTree.printPostOrder();
+        newTree.printPreOrder();
 
         //QUEUE WITH ARRAY IMPLEMENTATION TESTING:
 

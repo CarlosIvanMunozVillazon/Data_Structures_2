@@ -20,55 +20,43 @@ public class BinaryTree {
     }
 
     private Node root;
+    private int size;
 
     public BinaryTree() {
         this.root = null;
+        this.size = 0;
+
     }
 
     private void inOrder(Node root) {
 
-        if (root == null) {
-            System.out.print("");
-        } else {
+        if (root != null) {
             inOrder(root.left);
             System.out.print(root.data + " ");
             inOrder(root.right);
         }
 
-
-        /*if (root.left != null && root.right != null) {
-            inOrder(root.left);
-            System.out.println(root.data);
-            inOrder(root.right);
-        } else {
-            System.out.println(root.data);
-        }*/
-
-//        System.out.println(root.data);
-
-        /*if (root.right != null) {
-            inOrder(root.left);
-        }*/
     }
 
-    public void printInOrder(Node root) {
+    public void printInOrder() {
         System.out.println("In order: ");
-        inOrder(root);
+        inOrder(this.root);
         System.out.println();
     }
 
     private void preOrder(Node root) {
-        System.out.println(root.data);
 
-        if (!(root.left == null || root.right == null)) {
+        if (root != null){
+            System.out.print(root.data + " ");
             preOrder(root.left);
             preOrder(root.right);
         }
+
     }
 
-    public void printPreOrder(Node root) {
+    public void printPreOrder() {
         System.out.println("Pre order: ");
-        preOrder(root);
+        preOrder(this.root);
         System.out.println();
     }
 
@@ -78,21 +66,13 @@ public class BinaryTree {
             postOrder(root.left);
             postOrder(root.right);
             System.out.print(root.data + " ");
-        } else {
-            System.out.print("");
         }
 
-        /*if (!(root.left == null || root.right == null)) {
-            postOrder(root.left);
-            postOrder(root.right);
-        }
-
-        System.out.println(root.data);*/
     }
 
-    public void printPostOrder(Node root) {
+    public void printPostOrder() {
         System.out.println("Post order: ");
-        postOrder(root);
+        postOrder(this.root);
         System.out.println();
     }
 
@@ -100,6 +80,7 @@ public class BinaryTree {
 
         if (root == null) {
             root = new Node(data);
+            this.size++;
         } else if (data != root.data) {
             if (data < root.data) {
                 root.left = insert(data, root.left);
@@ -111,11 +92,11 @@ public class BinaryTree {
         return root;
     }
 
-    public void insertDriver(int newData) {
-        System.out.println("Insertion procedure called");
+    public void insertData(int newData) {
         this.root = insert(newData, this.root);
-        printInOrder(this.root);
-        printPostOrder(this.root);
     }
 
+    public int getSize() {
+        return size;
+    }
 }
