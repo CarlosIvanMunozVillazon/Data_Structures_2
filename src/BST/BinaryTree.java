@@ -30,12 +30,15 @@ public class BinaryTree {
 
     private void inOrder(Node root) {
 
-        if (root != null) {
+        if (root.left != null) {
             inOrder(root.left);
-            System.out.print(root.data + " ");
-            inOrder(root.right);
         }
 
+        System.out.print(root.data + " ");
+
+        if (root.right != null) {
+            inOrder(root.right);
+        }
     }
 
     public void printInOrder() {
@@ -46,9 +49,18 @@ public class BinaryTree {
 
     private void preOrder(Node root) {
 
-        if (root != null){
+        /*if (root != null){
             System.out.print(root.data + " ");
             preOrder(root.left);
+            preOrder(root.right);
+        }*/
+        System.out.print(root.data + " ");
+
+        if (root.left != null){
+            preOrder(root.left);
+        }
+
+        if (root.right != null){
             preOrder(root.right);
         }
 
@@ -62,12 +74,21 @@ public class BinaryTree {
 
     private void postOrder(Node root) {
 
-        if (root != null) {
+        /*if (root != null) {
             postOrder(root.left);
             postOrder(root.right);
             System.out.print(root.data + " ");
+        }*/
+
+        if (root.left != null) {
+            postOrder(root.left);
         }
 
+        if (root.right != null) {
+            postOrder(root.right);
+        }
+
+        System.out.print(root.data + " ");
     }
 
     public void printPostOrder() {
@@ -94,6 +115,38 @@ public class BinaryTree {
 
     public void insertData(int newData) {
         this.root = insert(newData, this.root);
+    }
+
+    //Find the minimum
+
+    private Node findMinimum (Node root) {
+        if (root != null){
+            while (root.left != null){
+                root = root.left;
+            }
+        }
+
+        return root;
+    }
+
+    public int findMinorValue() {
+        Node returnNode = findMinimum(this.root);
+        return returnNode.data;
+    }
+
+    private Node findMaximum (Node root) {
+        if (root != null){
+            while (root.right != null){
+                root = root.right;
+            }
+        }
+
+        return root;
+    }
+
+    public int findMaxValue() {
+        Node returnNode = findMaximum(this.root);
+        return returnNode.data;
     }
 
     public int getSize() {

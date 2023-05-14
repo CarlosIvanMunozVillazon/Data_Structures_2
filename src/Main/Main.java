@@ -16,18 +16,26 @@ public class Main {
         BinaryTree newTree = new BinaryTree();
 
         newTree.insertData(5);
-        System.out.println(newTree.getSize());
+
 
         newTree.insertData(1);
         newTree.insertData(3);
         newTree.insertData(7);
+        newTree.insertData(58);
         newTree.insertData(6);
+        newTree.insertData(-1);
+        newTree.insertData(2);
+        newTree.insertData(11);
+        newTree.insertData(45);
 
         System.out.println(newTree.getSize());
 
         newTree.printInOrder();
         newTree.printPostOrder();
         newTree.printPreOrder();
+
+        System.out.println("Minimum element in the tree: " + newTree.findMinorValue());
+        System.out.println("Maximum element in the tree: " + newTree.findMaxValue());
 
         //QUEUE WITH ARRAY IMPLEMENTATION TESTING:
 
