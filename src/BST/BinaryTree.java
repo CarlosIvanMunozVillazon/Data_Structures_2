@@ -149,6 +149,43 @@ public class BinaryTree {
         return returnNode.data;
     }
 
+    private Node remove (Node root, int data){
+
+        if (root != null){
+            if (data < root.data) { //if data is less than out current root.data we should remove the item on the left
+                root.left = remove(root.left, data);
+            } else if (data > root.data) { //if data is greater than our current root.data then we should remove item on the right
+                root.right = remove(root.right, data);
+            } else if (root.right == null && root.left == null){
+                //if we found a leaf, then we just should delete the leaf
+                root = null;
+            } else if (root.right == null){
+                //if our data is == to the current root.data and the current root doesn't has right subtree, then we
+                //delete de current root by just pointing to the left.
+                root = root.left;
+            } else if (root.left == null){
+                //if our data is == to the current root.data and the current root doesn't has left subtree, then we
+                //delete de current root by just pointing to the right.
+                root = root.right;
+            } else {
+                //in case our current root has to sons, then we can get the maximum on the left subtree, or the minimum
+                //right subtree the copy it to the current root.data we want to delete, and finally delete the duplicated
+                //element we left in the remaining subtree.
+
+                Node temporal = findMaximum(root.left);
+                root.data = temporal.data;
+                root.left = remove(root.left, root.data);
+            }
+        } /*else {
+            return null;
+        }*/
+
+        return root;
+    }
+
+    public void removeData (int data){
+        this.root = remove(this.root, data);
+    }
     public int getSize() {
         return size;
     }

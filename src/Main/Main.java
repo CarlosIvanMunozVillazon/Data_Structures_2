@@ -31,11 +31,22 @@ public class Main {
         System.out.println(newTree.getSize());
 
         newTree.printInOrder();
-        newTree.printPostOrder();
-        newTree.printPreOrder();
+        /*newTree.printPostOrder();
+        newTree.printPreOrder();*/
 
         System.out.println("Minimum element in the tree: " + newTree.findMinorValue());
         System.out.println("Maximum element in the tree: " + newTree.findMaxValue());
+
+        System.out.println("Tree after deletions: ");
+
+        newTree.removeData(6);
+        newTree.printInOrder();
+
+        newTree.removeData(-1);
+        newTree.printInOrder();
+
+        newTree.removeData(58);
+        newTree.printInOrder();
 
         //QUEUE WITH ARRAY IMPLEMENTATION TESTING:
 
