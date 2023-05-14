@@ -1,10 +1,6 @@
 package Main;
 
-import BST.BinaryTree;
-import DoublyLinkedList.DoublyLinkedList;
-import LinkedLIstWithTail.LinkedListWithTail;
-import QueueWithArray.QueueArray;
-import StackWithArray.StackArray;
+import BST.BinarySearchTree;
 
 public class Main {
 
@@ -13,10 +9,9 @@ public class Main {
 
         //BINARY TREE IMPLEMENTATION TESTING:
 
-        BinaryTree newTree = new BinaryTree();
+        BinarySearchTree newTree = new BinarySearchTree();
 
-        newTree.insertData(5);
-
+        newTree.insertData(5); //Our root is 5.
 
         newTree.insertData(1);
         newTree.insertData(3);
@@ -28,17 +23,28 @@ public class Main {
         newTree.insertData(11);
         newTree.insertData(45);
 
+        System.out.println("Level order print: ");
+        newTree.printLevelOrder();
+
+        System.out.println("Post order print: ");
+        newTree.printPostOrder();
+
+
+/*
         System.out.println(newTree.getSize());
 
         newTree.printInOrder();
+*/
+
         /*newTree.printPostOrder();
         newTree.printPreOrder();*/
 
-        System.out.println("Minimum element in the tree: " + newTree.findMinorValue());
-        System.out.println("Maximum element in the tree: " + newTree.findMaxValue());
+//        System.out.println("Minimum element in the tree: " + newTree.findMinorValue());
+//        System.out.println("Maximum element in the tree: " + newTree.findMaxValue());
 
-        System.out.println("Tree after deletions: ");
+//        System.out.println("Tree after deletions: ");
 
+/*
         newTree.removeData(6);
         newTree.printInOrder();
 
@@ -47,10 +53,11 @@ public class Main {
 
         newTree.removeData(58);
         newTree.printInOrder();
+*/
 
-        System.out.println("Tree searches for deleted and non deleted numbers: ");
+//        System.out.println("Tree searches for deleted and non deleted numbers: ");
 
-        System.out.println(newTree.find(6));
+        /*System.out.println(newTree.find(6));
         System.out.println(newTree.find(45));
         System.out.println();
         System.out.println(newTree.find(1));
@@ -62,6 +69,10 @@ public class Main {
         System.out.println(newTree.find(11));
         System.out.println(newTree.find(48));
         System.out.println(newTree.find(29));
+    */
+//        System.out.println("Level order print: ");
+
+
         //QUEUE WITH ARRAY IMPLEMENTATION TESTING:
 
 /*

@@ -1,6 +1,8 @@
 package BST;
 
-public class BinaryTree {
+import LinkedLIstWithTail.LinkedListWithTail;
+
+public class BinarySearchTree {
 
     private static class Node {
 
@@ -22,7 +24,7 @@ public class BinaryTree {
     private Node root;
     private int size;
 
-    public BinaryTree() {
+    public BinarySearchTree() {
         this.root = null;
         this.size = 0;
 
@@ -49,11 +51,13 @@ public class BinaryTree {
 
     private void preOrder(Node root) {
 
-        /*if (root != null){
+        /*if (root != null){ wrong implementation, unnecessary recursion done
             System.out.print(root.data + " ");
             preOrder(root.left);
             preOrder(root.right);
         }*/
+
+        //Unnecesary recursion is avoided.
         System.out.print(root.data + " ");
 
         if (root.left != null) {
@@ -92,9 +96,38 @@ public class BinaryTree {
     }
 
     public void printPostOrder() {
-        System.out.println("Post order: ");
         postOrder(this.root);
         System.out.println();
+    }
+
+    private void levelOrder(Node root) {
+        LinkedListWithTail<Node> queue = new LinkedListWithTail<>(); //we need a queue for keeping track of the elements
+        //e.i we "enqueue levels"
+
+        queue.pushBack(root);//first we enqueue the root of our tree
+
+        while (!queue.isEmpty()) {//while the queue isn't empty we continue enqueueing elements of the tree
+            //we pick up the first element in the queue.
+            Node proofNode = queue.topFront();
+            //we delete that element since we already save it in "proofNode"
+            queue.popFront();
+            //we print our data in the node
+            System.out.print(proofNode.data + " ");
+
+            //finally we watch out the other elements in the tree, enqueueing the subtrees.
+            if (proofNode.left != null) {
+                queue.pushBack(proofNode.left);
+            }
+            if (proofNode.right != null) {
+                queue.pushBack(proofNode.right);
+            }
+        }
+        System.out.println();
+
+    }
+
+    public void printLevelOrder() {
+        levelOrder(this.root);
     }
 
     private Node insert(int data, Node root) {
