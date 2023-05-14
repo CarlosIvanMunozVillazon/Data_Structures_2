@@ -56,11 +56,11 @@ public class BinaryTree {
         }*/
         System.out.print(root.data + " ");
 
-        if (root.left != null){
+        if (root.left != null) {
             preOrder(root.left);
         }
 
-        if (root.right != null){
+        if (root.right != null) {
             preOrder(root.right);
         }
 
@@ -119,9 +119,9 @@ public class BinaryTree {
 
     //Find the minimum
 
-    private Node findMinimum (Node root) {
-        if (root != null){
-            while (root.left != null){
+    private Node findMinimum(Node root) {
+        if (root != null) {
+            while (root.left != null) {
                 root = root.left;
             }
         }
@@ -134,9 +134,9 @@ public class BinaryTree {
         return returnNode.data;
     }
 
-    private Node findMaximum (Node root) {
-        if (root != null){
-            while (root.right != null){
+    private Node findMaximum(Node root) {
+        if (root != null) {
+            while (root.right != null) {
                 root = root.right;
             }
         }
@@ -149,21 +149,21 @@ public class BinaryTree {
         return returnNode.data;
     }
 
-    private Node remove (Node root, int data){
+    private Node remove(Node root, int data) {
 
-        if (root != null){
+        if (root != null) {
             if (data < root.data) { //if data is less than out current root.data we should remove the item on the left
                 root.left = remove(root.left, data);
             } else if (data > root.data) { //if data is greater than our current root.data then we should remove item on the right
                 root.right = remove(root.right, data);
-            } else if (root.right == null && root.left == null){
+            } else if (root.right == null && root.left == null) {
                 //if we found a leaf, then we just should delete the leaf
                 root = null;
-            } else if (root.right == null){
+            } else if (root.right == null) {
                 //if our data is == to the current root.data and the current root doesn't has right subtree, then we
                 //delete de current root by just pointing to the left.
                 root = root.left;
-            } else if (root.left == null){
+            } else if (root.left == null) {
                 //if our data is == to the current root.data and the current root doesn't has left subtree, then we
                 //delete de current root by just pointing to the right.
                 root = root.right;
@@ -183,9 +183,29 @@ public class BinaryTree {
         return root;
     }
 
-    public void removeData (int data){
+    private boolean search(Node root, int data) {
+
+        if (root != null) {
+            if (data > root.data) {
+                return search(root.right, data);
+            } else if (data < root.data) {
+                return search(root.left, data);
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public boolean find(int data) {
+        return search(this.root, data);
+    }
+
+    public void removeData(int data) {
         this.root = remove(this.root, data);
     }
+
     public int getSize() {
         return size;
     }

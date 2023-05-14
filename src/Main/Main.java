@@ -48,6 +48,20 @@ public class Main {
         newTree.removeData(58);
         newTree.printInOrder();
 
+        System.out.println("Tree searches for deleted and non deleted numbers: ");
+
+        System.out.println(newTree.find(6));
+        System.out.println(newTree.find(45));
+        System.out.println();
+        System.out.println(newTree.find(1));
+        System.out.println(newTree.find(2));
+        System.out.println(newTree.find(3));
+        System.out.println(newTree.find(4));
+        System.out.println(newTree.find(5));
+        System.out.println(newTree.find(7));
+        System.out.println(newTree.find(11));
+        System.out.println(newTree.find(48));
+        System.out.println(newTree.find(29));
         //QUEUE WITH ARRAY IMPLEMENTATION TESTING:
 
 /*
