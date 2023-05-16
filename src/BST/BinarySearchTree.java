@@ -132,13 +132,13 @@ public class BinarySearchTree {
 
     private Node insert(int data, Node root) {
 
-        if (root == null) {
+        if (root == null) { // the root is null, then that means the tree is empty
             root = new Node(data);
             this.size++;
-        } else if (data != root.data) {
-            if (data < root.data) {
+        } else if (data != root.data) { // if the new data isn't in the tree, then we can see where to insert it.
+            if (data < root.data) { //peek right
                 root.left = insert(data, root.left);
-            } else {
+            } else { //peek left
                 root.right = insert(data, root.right);
             }
         }
@@ -150,8 +150,7 @@ public class BinarySearchTree {
         this.root = insert(newData, this.root);
     }
 
-    //Find the minimum
-
+    //Find the minimum: we just go all the way down to the left, cause there is secure that a very little element will live.
     private Node findMinimum(Node root) {
         if (root != null) {
             while (root.left != null) {
@@ -162,12 +161,13 @@ public class BinarySearchTree {
         return root;
     }
 
-    public int findMinorValue() {
+    public int findMinorValue() { //driver function
         Node returnNode = findMinimum(this.root);
         return returnNode.data;
     }
 
-    private Node findMaximum(Node root) {
+    private Node findMaximum(Node root) { //we go down all the way to the right cause there we now it will exist
+        //the greatest values of the tree.
         if (root != null) {
             while (root.right != null) {
                 root = root.right;
@@ -177,7 +177,7 @@ public class BinarySearchTree {
         return root;
     }
 
-    public int findMaxValue() {
+    public int findMaxValue() { //driver function
         Node returnNode = findMaximum(this.root);
         return returnNode.data;
     }
@@ -209,11 +209,13 @@ public class BinarySearchTree {
                 root.data = temporal.data;
                 root.left = remove(root.left, root.data);
             }
-        } /*else {
-            return null;
-        }*/
+        }
 
         return root;
+    }
+
+    public void removeData(int data) { //driver function
+        this.root = remove(this.root, data);
     }
 
     private boolean search(Node root, int data) {
@@ -231,13 +233,52 @@ public class BinarySearchTree {
         }
     }
 
-    public boolean find(int data) {
+    public boolean find(int data) { //driver function
         return search(this.root, data);
     }
 
-    public void removeData(int data) {
-        this.root = remove(this.root, data);
+    private int height(Node root) {
+
+        if (root == null) { //if the root is null, then the height is 0
+            return 0;
+        } else { //in other case if we got a node, then we count the node, and search the height in the other subtrees.
+            return 1 + Math.max(height(root.left), height(root.right));
+        }
+
     }
+
+    public int getTreeHeight() { //driver function
+        return height(this.root);
+    }
+
+    private int size(Node root) {
+        //this works the same as the previous method were we got the height of the tree.
+        if (root == null) {
+            return 0;
+        } else {
+            return 1 + size(root.left) + size(root.right);
+        }
+    }
+
+    public int getSizeRecursive() { //driver function
+        return size(this.root);
+    }
+
+    public Node leftDescendant(Node root) { //returns the closest left descendant
+        Node referenceNode = root.right;
+
+        while (referenceNode.left != null) {
+            referenceNode = referenceNode.left;
+        }
+
+        return referenceNode;
+    }
+
+    /*public Node rightAncestor(Node root){
+
+
+    }*/
+
 
     public int getSize() {
         return size;

@@ -22,6 +22,7 @@ public class Main {
         newTree.insertData(2);
         newTree.insertData(11);
         newTree.insertData(45);
+        newTree.insertData(46);
 
         System.out.println("Level order print: ");
         newTree.printLevelOrder();
@@ -29,6 +30,8 @@ public class Main {
         System.out.println("Post order print: ");
         newTree.printPostOrder();
 
+        System.out.println("The height of the new tree is: ");
+        System.out.println(newTree.getTreeHeight());
 
 /*
         System.out.println(newTree.getSize());
