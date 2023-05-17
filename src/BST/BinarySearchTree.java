@@ -201,7 +201,7 @@ public class BinarySearchTree {
                 //delete de current root by just pointing to the right.
                 root = root.right;
             } else {
-                //in case our current root has to sons, then we can get the maximum on the left subtree, or the minimum
+                //in case our current root has two sons, then we can get the maximum on the left subtree, or the minimum
                 //right subtree the copy it to the current root.data we want to delete, and finally delete the duplicated
                 //element we left in the remaining subtree.
 
@@ -210,6 +210,8 @@ public class BinarySearchTree {
                 root.left = remove(root.left, root.data);
             }
         }
+
+        this.size--;
 
         return root;
     }
