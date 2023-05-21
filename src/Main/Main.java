@@ -1,14 +1,57 @@
 package Main;
 
+import AVL.AVLTree;
 import BST.BinarySearchTree;
 
 public class Main {
 
     public static void main(String[] args) {
 
+        //AVL TREE IMPLEMENTATION TESTING:
+
+        AVLTree newAVL = new AVLTree();
+
+        /*newAVL.insertData(10);
+        newAVL.insertData(20);
+        newAVL.insertData(15);
+        newAVL.insertData(14);
+
+        newAVL.insertData(25);
+        newAVL.insertData(24);
+        newAVL.insertData(23);
+
+        newAVL.printInOrder();
+        newAVL.printPreOrder();
+        newAVL.printPostOrder();
+
+        newAVL.printLevelOrder();
+
+        newAVL.deleteData(25);
+        newAVL.printInOrder();*/
+
+        newAVL.insertData(50);
+        newAVL.insertData(60);
+        newAVL.insertData(55);
+        newAVL.insertData(54);
+        newAVL.insertData(57);
+        newAVL.insertData(56);
+        newAVL.insertData(58);
+        newAVL.insertData(70);
+        newAVL.insertData(53);
+
+        newAVL.printInOrder();
+
+        newAVL.deleteData(55);
+
+        newAVL.printInOrder();
+
+
+
+
 
         //BINARY TREE IMPLEMENTATION TESTING:
 
+/*
         BinarySearchTree newTree = new BinarySearchTree();
 
         newTree.insertData(5); //Our root is 5.
@@ -32,6 +75,7 @@ public class Main {
 
         System.out.println("The height of the new tree is: ");
         System.out.println(newTree.getTreeHeight());
+*/
 
 /*
         System.out.println(newTree.getSize());

@@ -45,6 +45,7 @@ public class AVLTree {
         if (root.right != null) {
             inOrder(root.right);
         }
+
     }
 
     public void printInOrder() {
@@ -54,6 +55,7 @@ public class AVLTree {
     }
 
     private void preOrder(Node root) {
+
 
         //Unnecesary recursion is avoided.
         System.out.print(root.data + " ");
@@ -65,6 +67,7 @@ public class AVLTree {
         if (root.right != null) {
             preOrder(root.right);
         }
+
 
     }
 
@@ -85,9 +88,11 @@ public class AVLTree {
         }
 
         System.out.print(root.data + " ");
+
     }
 
     public void printPostOrder() {
+        System.out.println("Post order: ");
         postOrder(this.root);
         System.out.println();
     }
@@ -114,22 +119,30 @@ public class AVLTree {
 
     }
 
+    public void printLevelOrder() {
+        System.out.println("Level order: ");
+        levelOrder(this.root);
+    }
+
     private Node find(int key, Node root) {
-        if (key == root.data) { //if the element is in the tree, we return the node that already contains the element.
-            return root;
-        } else {
-            //if the key is less than the data then we search in the left only if there is a left subtree.
-            if (key < root.data && root.left != null) {
+
+        try {
+            if (key == root.data) { //if the element is in the tree, we return the node that already contains the element.
+                return root;
+            } else if (key < root.data && root.left != null) { //if the key is less than the data then we search in the left only if there is a left subtree.
                 return find(key, root.left);
-                //if the key is greater than the data then we search in the right only if there is a right subtree.
-            } else if (key > root.data && root.right != null) {
+            } else if (key > root.data && root.right != null) { //if the key is greater than the data then we search in the right only if there is a right subtree.
                 return find(key, root.right);
             } else {
                 //at the end if the element is not in the tree, then we can return the node which should contain it
                 //in case we try to insert the key in the tree.
                 return root;
             }
+        } catch (NullPointerException e) {
+            //exception handling just for the first insertion.
+            return null;
         }
+
     }
 
     /*OPERATIONS FOR FINDING THE NEXT: */
@@ -141,7 +154,7 @@ public class AVLTree {
     private Node leftDescendant(Node rightSon) {
 
         Node referenceNode = rightSon.left;
-        while (referenceNode != null) {
+        while (referenceNode.left != null) {
             referenceNode = referenceNode.left;
         }
 
@@ -170,8 +183,10 @@ public class AVLTree {
     private Node next(Node root) {
 
         Node referenceNode = root;
-        if (root.right != null) {
+        if (root.right != null && root.right.left != null) {
             referenceNode = leftDescendant(referenceNode.right);
+        } else if (root.right != null) {
+            referenceNode = root.right;
         } else {
             referenceNode = rightAncestor(referenceNode);
         }
@@ -195,19 +210,26 @@ public class AVLTree {
     //si elemento ya está, que no lo inserte
 
     private void insert(int key, Node root) {
-        //first we search where the new element should be.
-        Node referenceNode = find(key, root);
+        //first we search where the new element should be, for that we use a pointer called reference node.
+        Node referenceNode = find(key, root); //this pointer is usefull for all the data, except the first root
 
-        if (key != referenceNode.data) { //if the key isn't in the tree, then we can insert it
-            //if the key is greater than we insert to the right, in other case we insert to the left
-            Node newNode = new Node(key);
-            newNode.parent = referenceNode;
+        if (referenceNode != null) { // conditional for handling the first insertion.
+            if (key != referenceNode.data) { //if the key isn't in the tree, then we can insert it
 
-            if (key > referenceNode.data) {
-                referenceNode.right = newNode;
-            } else {
-                referenceNode.left = newNode;
+                Node newNode = new Node(key);
+                newNode.parent = referenceNode;
+
+                //if the key is greater than we insert to the right, in other case we insert to the left
+                if (key > referenceNode.data) {
+                    referenceNode.right = newNode;
+                } else {
+                    referenceNode.left = newNode;
+                }
+
             }
+
+        } else {
+            this.root = new Node(key); //this is how we insert the first node.
         }
 
     }
@@ -217,30 +239,63 @@ public class AVLTree {
         insert(key, this.root);
     }
 
-
-    //Como eliminar
-    //1. encontrar el nodo que queremos eliminar.
-    //2. encontrar el next del nodo que queremos eliminar.
-    //3. copiar el dato del next al nodo que queremos borrar.
-    //4. asignar un padre a los hijos del nodo que se eliminó.
-    //4.1 si el eliminado tenia hijo derecho, se promueve al lugar que estaba el eliminado
-    //4.2 en caso contrario se le asigna al hijo izquierdo el padre el nodo eliminado.
-
     private void delete(int key, Node root) {
 
         //For deleteing a node, we must find it
         Node referenceNode = find(key, root);
 
-        if (referenceNode.data == key) { //if the element is in the tree, then we can delete it
-            if (referenceNode.right == null) { //if we don't have a right child, the is easy to delete
-                referenceNode.parent.left = referenceNode.left; //we make the parent point to the left son of the deleted node
-            } else {
-                Node nextNode = next(referenceNode);
-                referenceNode.data = nextNode.data;
-                nextNode.parent.left = nextNode.right;
+        if (referenceNode != null) {
+            if (referenceNode.data == key) { //if the element is in the tree, then we can delete it
+
+                if (referenceNode.left == null && referenceNode.right == null) { //if we want to delete a leaf.
+
+                    if (referenceNode.data < referenceNode.parent.data) { //left leaf
+                        referenceNode.parent.left = null;
+                    } else { //right leaf
+                        referenceNode.parent.right = null;
+                    }
+
+                } else if (referenceNode.left == null && referenceNode.data < referenceNode.parent.data) {
+                    //left child without left child but a righ child
+                    /*referenceNode.right != null*/ //not null is already checked up
+
+                    referenceNode.parent.left = referenceNode.right;
+
+                } else if (referenceNode.right == null && referenceNode.data > referenceNode.parent.data) {
+                    //right child without right child but a left child
+
+                    referenceNode.parent.right = referenceNode.left;
+
+                } else if (referenceNode.data > referenceNode.parent.data && referenceNode.left == null) {
+                    //right child without left child but a right child
+                    referenceNode.parent.right = referenceNode.right;
+
+                } else if (referenceNode.data < referenceNode.parent.data && referenceNode.right == null) {
+                    //left child without right child but a left child
+                    referenceNode.parent.left = referenceNode.left;
+
+                } else {
+                    //node with two sons
+                    Node nextNode = next(referenceNode);
+                    referenceNode.data = nextNode.data;
+                    if (nextNode.parent == referenceNode) {
+                        referenceNode.right = null;
+                    } else {
+                        nextNode.parent.left = nextNode.right;
+                    }
+
+                }
+
             }
+        } else {
+            System.out.println("All the elements have been deleted.");
         }
 
+    }
+
+    //Driver method
+    public void deleteData(int key) {
+        delete(key, this.root);
     }
 
 
