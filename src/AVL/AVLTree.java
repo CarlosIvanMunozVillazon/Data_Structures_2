@@ -29,9 +29,11 @@ public class AVLTree {
     }
 
     private Node root;
+    private int size;
 
     public AVLTree() {
         this.root = null;
+        this.size = 0;
     }
 
     private void inOrder(Node root) {
@@ -204,10 +206,6 @@ public class AVLTree {
     /*Implement nearest neighbors (x, y, R)*/
 //-------------------------------------------------------------------
 
-    //si el nuevo nodo es mayor que el dato de la raiz, se lo inserto a la derecha,
-    //en otro caso se lo inserto a la derecha.
-
-    //si elemento ya está, que no lo inserte
 
     private void insert(int key, Node root) {
         //first we search where the new element should be, for that we use a pointer called reference node.
@@ -226,6 +224,9 @@ public class AVLTree {
                     referenceNode.left = newNode;
                 }
 
+                referenceNode.height = height(referenceNode);
+
+                this.size++;
             }
 
         } else {
@@ -285,7 +286,7 @@ public class AVLTree {
                     }
 
                 }
-
+                this.size--;
             }
         } else {
             System.out.println("All the elements have been deleted.");
@@ -298,5 +299,163 @@ public class AVLTree {
         delete(key, this.root);
     }
 
+    private int height(Node root) {
 
+        if (root == null) { // BinarySearchTree.java implementation
+            return 0;
+        } else {
+            return 1 + Math.max(height(root.left), height(root.right));
+        }
+
+    }
+
+    public int getTreeHeight() { //driver function
+        return height(this.root);
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+
+    //Rotations.
+    private void rotateLeft(int key) {
+
+        Node referenceNode = find(key, this.root);
+
+        if (referenceNode != null && referenceNode.parent != null) {
+            referenceNode.left.parent = referenceNode.parent;
+
+            referenceNode.parent = referenceNode.parent.parent;
+
+            referenceNode.parent.right = referenceNode;
+
+            referenceNode.left.parent.right = referenceNode.right;
+
+            referenceNode.left = referenceNode.left.parent;
+        } else {
+
+        }
+
+    }
+
+    private void rotateRight(Node referenceNode) {
+
+        if (referenceNode != null) {
+            if (referenceNode.left == null && referenceNode.right == null) { //for the leaves
+                if (referenceNode.parent != null) {
+                    Node parent = referenceNode.parent;
+
+                    if (referenceNode.parent.parent != null) {
+                        Node grandParent = referenceNode.parent.parent;
+                        referenceNode.parent = grandParent;
+
+                        referenceNode.right = parent;
+                        grandParent.left = referenceNode;
+
+                        parent.parent = referenceNode;
+                        parent.left = null;
+
+                    } else {
+                        referenceNode.right = parent;
+                        referenceNode.parent = null;
+
+                        parent.parent = referenceNode;
+                        parent.left = null;
+
+                        this.root = referenceNode;
+                    }
+
+                }
+
+            } else if (referenceNode.parent != null) {
+
+                Node parent = referenceNode.parent;
+
+                if (referenceNode.right != null){ //when our reference has a right child
+                    Node rightChild = referenceNode.right;
+
+                    if (referenceNode.parent.parent != null) { //when our reference's father isn't the root
+                        Node grandParent = referenceNode.parent.parent;
+                        rightChild.parent = parent;
+
+                        referenceNode.parent = grandParent;
+                        grandParent.left = referenceNode;
+
+                        parent.left = rightChild;
+                        referenceNode.right = parent;
+
+                    } else { //when our reference's father is the root.
+                        parent.parent = referenceNode;
+                        referenceNode.parent = null;
+
+                        parent.left = rightChild;
+                        rightChild.parent = parent;
+
+                        referenceNode.right = parent;
+                        this.root = referenceNode;
+
+                    }
+                } else { //when our reference hasn't a right child
+                    referenceNode.right = parent;
+                    referenceNode.parent = parent.parent;
+                    referenceNode.parent.left = referenceNode;
+                    parent.left = null;
+
+                }
+
+
+            } else { //for the root
+
+                if (referenceNode.left != null) {
+                    referenceNode.parent = referenceNode.left;
+                    if (referenceNode.left.right != null) { //when our left son has a sub tree.
+
+                        Node rightChild = referenceNode.left.right;
+                        referenceNode.parent.right = referenceNode;
+                        referenceNode.left = rightChild;
+
+                        referenceNode.parent.parent = null;
+
+
+                    } else { //when our left son hasn't a sub tree.
+
+                        referenceNode.left.right = referenceNode;
+                        referenceNode.parent.parent = null;
+                        referenceNode.left = null;
+                    }
+                    this.root = referenceNode.parent;
+
+                }
+            }
+        }
+
+
+            /*referenceNode.right.parent = referenceNode.parent;
+            referenceNode.parent = referenceNode.parent.parent;
+
+            if (referenceNode.parent.parent != null) {
+                referenceNode.parent.left = referenceNode;
+
+            }
+
+            Node grandParent = referenceNode.parent.parent;
+            Node parent = referenceNode.parent;
+            Node rightChild = referenceNode.right;
+
+
+            referenceNode.right.parent.left = referenceNode.right;
+            referenceNode.right = referenceNode.right.parent;*/
+
+
+    }
+
+    public void rightRotation(int key) {
+        Node referenceNode = find(key, this.root);
+        rotateRight(referenceNode);
+    }
+
+    public void leftRotation() {
+
+    }
 }

@@ -29,7 +29,7 @@ public class Main {
         newAVL.deleteData(25);
         newAVL.printInOrder();*/
 
-        newAVL.insertData(50);
+        /*newAVL.insertData(50);
         newAVL.insertData(60);
         newAVL.insertData(55);
         newAVL.insertData(54);
@@ -43,11 +43,52 @@ public class Main {
 
         newAVL.deleteData(55);
 
-        newAVL.printInOrder();
+        newAVL.printInOrder();*/
 
+        //rotations testing
 
+        newAVL.insertData(10);
+        newAVL.insertData(5);
+        newAVL.insertData(4);
+        newAVL.insertData(3);
+        newAVL.insertData(2);
+        newAVL.insertData(1);
 
+        /*newAVL.insertData(3);
+        newAVL.insertData(4);
+        newAVL.insertData(2);
+        newAVL.insertData(7);
+        newAVL.insertData(6);
+        newAVL.insertData(8);
+        newAVL.insertData(12);
+        newAVL.insertData(11);*/
 
+//        newAVL.insertData(5);
+//
+//        newAVL.insertData(1);
+//        newAVL.insertData(3);
+
+        newAVL.printPostOrder();
+
+        newAVL.rightRotation(2);
+
+        newAVL.printPostOrder();
+
+        newAVL.rightRotation(4);
+
+        newAVL.printPostOrder();
+
+        newAVL.rightRotation(4);
+
+        newAVL.printPostOrder();
+
+        newAVL.rightRotation(2);
+
+        newAVL.printPostOrder();
+
+        newAVL.rightRotation(1);
+
+        newAVL.printPostOrder();
 
         //BINARY TREE IMPLEMENTATION TESTING:
 

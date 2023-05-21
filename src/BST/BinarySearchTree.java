@@ -285,4 +285,27 @@ public class BinarySearchTree {
     public int getSize() {
         return size;
     }
+
+    public Node levelOrderCreate (int key, Node root) {
+
+        if (root == null){
+            root = new Node(key);
+        }
+
+        if (root.left == null) {
+            root.left = new Node(key);
+        }
+
+        if (root.right == null) {
+            root.right = new Node(key);
+
+        }
+
+        return root;
+
+    }
+
+    public void levelOrderQueue (int [] integerQueue, Node root){
+
+    }
 }
