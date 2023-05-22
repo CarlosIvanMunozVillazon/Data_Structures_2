@@ -52,16 +52,18 @@ public class Main {
         newAVL.insertData(27);
         newAVL.insertData(26);
         newAVL.insertData(28);
-        newAVL.insertData(24);
         newAVL.insertData(15);
         newAVL.insertData(14);
-        newAVL.insertData(10);
+        newAVL.insertData(16);
+
+
 
 
         newAVL.insertData(60);
         newAVL.insertData(70);
-        newAVL.insertData(52);
+        newAVL.insertData(55);
         newAVL.insertData(53);
+        newAVL.insertData(56);
         newAVL.insertData(65);
         newAVL.insertData(71);
 
@@ -89,12 +91,18 @@ public class Main {
 
 //        newAVL.leftRotation(10);
 
+//        newAVL.rightRotation(26);
+//        newAVL.printPostOrder();
 
-        newAVL.printPostOrder();
 
-        newAVL.leftRotation(70);
+//        newAVL.rightRotation(60);
+//        newAVL.printPostOrder();
 
-        newAVL.printPostOrder();
+
+
+//        newAVL.rightRotation(20);
+//        newAVL.printPostOrder();
+
 
        /*
         newAVL.rightRotation(14);
