@@ -94,25 +94,21 @@ public class Main {
 //        newAVL.printPostOrder();
 
 
-        int [] array = {4, 20, 10, -1, 16, 4, 0};
+        int[] array = {4, 20, 10, -1, 16, 4, 0};
 
         BinarySearchTree levelOrderTree = new BinarySearchTree(array);
 
         levelOrderTree.printInOrder();
-        levelOrderTree.inOrderStringDriver();
-        System.out.println();
+        System.out.println(levelOrderTree.inOrderStringDriver());
 
         levelOrderTree.printPostOrder();
-        levelOrderTree.postOrderStringDriver();
-        System.out.println();
+        System.out.println(levelOrderTree.postOrderStringDriver());
 
         levelOrderTree.printPreOrder();
-        levelOrderTree.preOrderStringDriver();
-        System.out.println();
+        System.out.println(levelOrderTree.preOrderStringDriver());
 //        levelOrderTree.inOrder2();
 //        newAVL.leftRotation(32);
 //        newAVL.printPostOrder();
-
 
 
 //        newAVL.rightRotation(20);
@@ -143,8 +139,6 @@ public class Main {
         newAVL.rightRotation(32);
 
         newAVL.printPostOrder();*/
-
-
 
 
 //

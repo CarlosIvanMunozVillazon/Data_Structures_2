@@ -342,14 +342,13 @@ public class BinarySearchTree {
         return finalResult;
     }
 
-    public void inOrderStringDriver() {
-        System.out.println(inOrderString(this.root));
+    public String inOrderStringDriver() {
+        return inOrderString(this.root);
     }
 
     private String postOrderString(Node root) {
 
         String result = "";
-
         if (root.left != null) {
             result += postOrderString(root.left);
         }
@@ -363,16 +362,14 @@ public class BinarySearchTree {
         return result;
     }
 
-    public void postOrderStringDriver() {
-        System.out.println(postOrderString(this.root));
+    public String postOrderStringDriver() {
+        return postOrderString(this.root);
     }
 
 
     private String preOrderString(Node root) {
 
-
         String finalResult = root.data + " ";
-
         if (root.left != null) {
             finalResult += preOrderString(root.left);
         }
@@ -385,8 +382,8 @@ public class BinarySearchTree {
     }
 
 
-    public void preOrderStringDriver() {
-        System.out.println(preOrderString(this.root));
+    public String preOrderStringDriver() {
+        return preOrderString(this.root);
     }
 
 
