@@ -95,8 +95,8 @@ public class Main {
 //        newAVL.printPostOrder();
 
 
-//        newAVL.rightRotation(60);
-//        newAVL.printPostOrder();
+        newAVL.leftRotation(32);
+        newAVL.printPostOrder();
 
 
 

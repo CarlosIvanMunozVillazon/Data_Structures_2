@@ -347,7 +347,7 @@ public class AVLTree {
                     referenceNode.left = null;
                 }
             } else {
-                if (referenceNode.data < referenceNode.parent.data){
+                if (referenceNode.data < referenceNode.parent.data) {
                     rotateRight(referenceNode.parent);
                 }
             }
@@ -357,16 +357,11 @@ public class AVLTree {
 
     }
 
-    public void rightRotation(int key) {
-        Node referenceNode = find(key, this.root);
-        rotateRight(referenceNode);
-    }
-
 
     private void rotateLeft(Node referenceNode) {
 
         if (referenceNode != null) {
-            if (referenceNode.right != null){
+            if (referenceNode.right != null) {
                 Node grandParent = referenceNode.parent.parent;
                 Node parent = referenceNode.parent;
                 Node leftSon = referenceNode.left;
@@ -388,7 +383,7 @@ public class AVLTree {
                     referenceNode.parent.left = referenceNode;
                 }
 
-            } else{
+            } else {
                 Node grandParent = referenceNode.parent.parent;
                 Node parent = referenceNode.parent;
 
@@ -409,15 +404,69 @@ public class AVLTree {
             }
 
 
+        }
+
+    }
+
+    private void rotateRightRoot() {
+
+        if (this.root.right != null) {
+
+            Node rightSon = this.root.right;
+
+            this.root.right = rightSon.left;
+            rightSon.left.parent = this.root;
+
+            rightSon.left = this.root;
+
+            this.root.parent = rightSon;
+            this.root = rightSon;
+
+            this.root.parent = null;
+
+
+        }
+    }
+
+    private void rotateLeftRoot() {
+
+        if (this.root.left != null) {
+
+            Node leftSon = this.root.left;
+            this.root.left = leftSon.right;
+            leftSon.right.parent = this.root;
+            this.root.parent = leftSon;
+            leftSon.right = this.root;
+            this.root = leftSon;
+            this.root.parent = null;
 
         }
 
     }
 
 
+    public void rightRotation(int key) {
+        Node referenceNode = find(key, this.root);
+
+        if (this.root.left == referenceNode) {
+            rotateLeftRoot();
+        } else if (referenceNode == this.root) {
+            rotateRightRoot();
+        } else {
+            rotateRight(referenceNode);
+        }
+    }
+
     public void leftRotation(int key) {
         Node referenceNode = find(key, this.root);
-        rotateLeft(referenceNode);
+        if (this.root.right == referenceNode) {
+            rotateRightRoot();
+        } else if (referenceNode == this.root) {
+            rotateLeftRoot();
+        } else {
+            rotateLeft(referenceNode);
+        }
+
     }
 
 }
