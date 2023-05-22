@@ -47,12 +47,29 @@ public class Main {
 
         //rotations testing
 
+        newAVL.insertData(32);
+        newAVL.insertData(20);
+        newAVL.insertData(27);
+        newAVL.insertData(26);
+        newAVL.insertData(28);
+        newAVL.insertData(24);
+        newAVL.insertData(15);
+        newAVL.insertData(14);
         newAVL.insertData(10);
-        newAVL.insertData(5);
-        newAVL.insertData(4);
-        newAVL.insertData(3);
-        newAVL.insertData(2);
+
+
+        newAVL.insertData(60);
+        newAVL.insertData(70);
+        newAVL.insertData(52);
+        newAVL.insertData(53);
+        newAVL.insertData(65);
+        newAVL.insertData(71);
+
+ /*       newAVL.insertData(2);
         newAVL.insertData(1);
+ */       /*newAVL.insertData(3);
+        newAVL.insertData(2);
+        newAVL.insertData(1);*/
 
         /*newAVL.insertData(3);
         newAVL.insertData(4);
@@ -68,7 +85,65 @@ public class Main {
 //        newAVL.insertData(1);
 //        newAVL.insertData(3);
 
+//        newAVL.printPostOrder();
+
+//        newAVL.leftRotation(10);
+
+
         newAVL.printPostOrder();
+
+        newAVL.leftRotation(70);
+
+        newAVL.printPostOrder();
+
+       /*
+        newAVL.rightRotation(14);
+
+        newAVL.printPostOrder();
+
+        newAVL.rightRotation(15);
+
+        newAVL.printPostOrder();
+
+        newAVL.rightRotation(26);
+
+        newAVL.printPostOrder();
+
+        newAVL.rightRotation(27);
+
+        newAVL.printPostOrder();
+
+        newAVL.rightRotation(15);
+
+        newAVL.printPostOrder();
+
+        newAVL.rightRotation(32);
+
+        newAVL.printPostOrder();*/
+
+
+
+
+//
+//        newAVL.rightRotation(15);
+//
+//        newAVL.printPostOrder();
+
+        /*newAVL.leftRotation(15);
+
+        newAVL.printPostOrder();
+
+        newAVL.rightRotation(15);
+
+        newAVL.printPostOrder();*/
+
+        /*newAVL.rightRotation(20);
+
+        newAVL.printPostOrder();*/
+
+//        newAVL.printPostOrder();
+
+        /*newAVL.printPostOrder();
 
         newAVL.rightRotation(2);
 
@@ -88,7 +163,7 @@ public class Main {
 
         newAVL.rightRotation(1);
 
-        newAVL.printPostOrder();
+        newAVL.printPostOrder();*/
 
         //BINARY TREE IMPLEMENTATION TESTING:
 
