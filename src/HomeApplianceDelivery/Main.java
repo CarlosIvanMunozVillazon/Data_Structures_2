@@ -93,57 +93,5 @@ public class Main {
             }
         }
 
-        /*if (globalStacks[globalStacks.length - 1].empty()){
-            globalStacks[globalStacks.length - 1].printStackRegularOrder();
-        } else {
-            globalStacks[globalStacks.length - 1].printStackRegularOrder();
-            System.out.println();
-        }*/
-
     }
 }
-
-/*if (i < input.length - 4) {
- *//*stackArrays[k].printStackRegularOrder();
-                    System.out.println();*//*
-                    if (stackArrays[k].empty()){
-                        stackArrays[k].printStackRegularOrder();
-                    } else {
-                        stackArrays[k].printStackRegularOrder();
-                        System.out.println();
-                    }
-                } else {
-                    if (k < stores - 1) {
-                        if (stackArrays[k].empty()){
-                            stackArrays[k].printStackRegularOrder();
-                        } else {
-                            stackArrays[k].printStackRegularOrder();
-                            System.out.println();
-                        }
-                    } else {
-                        if (stackArrays[k].empty()){
-                            stackArrays[k].printStackRegularOrder();
-                        } else {
-                            stackArrays[k].printStackRegularOrder();
-                            System.out.println();
-                        }
-                    }
-                }*/
-                /*if (k == stores - 1) {
-                    if (i != input.length - 4) {
-                        for (int n = 0; n < stores; n++) {
-                            stackArrays[n].printStackRegularOrder();
-                            System.out.println();
-                        }
-                    } else {
-                        for (int n = 0; n < stores - 1; n++) {
-                            stackArrays[n].printStackRegularOrder();
-                            System.out.println();
-                        }
-                        stackArrays[stores - 1].printStackRegularOrder();
-                    }
-                }*/
-
-
-
-

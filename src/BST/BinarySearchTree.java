@@ -30,6 +30,12 @@ public class BinarySearchTree {
 
     }
 
+    public BinarySearchTree(int[] array) {
+        this.root = levelOrderCreate(array);
+        this.size = array.length;
+    }
+
+
     private void inOrder(Node root) {
 
         if (root.left != null) {
@@ -50,12 +56,6 @@ public class BinarySearchTree {
     }
 
     private void preOrder(Node root) {
-
-        /*if (root != null){ wrong implementation, unnecessary recursion done
-            System.out.print(root.data + " ");
-            preOrder(root.left);
-            preOrder(root.right);
-        }*/
 
         //Unnecesary recursion is avoided.
         System.out.print(root.data + " ");
@@ -78,12 +78,6 @@ public class BinarySearchTree {
 
     private void postOrder(Node root) {
 
-        /*if (root != null) {
-            postOrder(root.left);
-            postOrder(root.right);
-            System.out.print(root.data + " ");
-        }*/
-
         if (root.left != null) {
             postOrder(root.left);
         }
@@ -96,6 +90,7 @@ public class BinarySearchTree {
     }
 
     public void printPostOrder() {
+        System.out.println("Post order: ");
         postOrder(this.root);
         System.out.println();
     }
@@ -125,6 +120,7 @@ public class BinarySearchTree {
         System.out.println();
 
     }
+
 
     public void printLevelOrder() {
         levelOrder(this.root);
@@ -286,26 +282,112 @@ public class BinarySearchTree {
         return size;
     }
 
-    public Node levelOrderCreate (int key, Node root) {
+    private Node levelOrderCreate(int[] array) { //this fills your tree in level order, given an array.
 
-        if (root == null){
-            root = new Node(key);
+        Node node = new Node(array[0]);//root of our tree
+
+        // queue for keeping track of the numbers in the array.
+        LinkedListWithTail<Integer> numbers = new LinkedListWithTail<>();
+        // queue for filling the nodes' sons
+        LinkedListWithTail<Node> treeCreator = new LinkedListWithTail<>();
+        //first we set up the root of the tree, with the first element of the array.
+        treeCreator.pushBack(node);
+        //then we fill the queue with the numbers we want to have in the array.
+        for (int i = 1; i < array.length; i++) {
+            numbers.pushBack(array[i]);
         }
 
-        if (root.left == null) {
-            root.left = new Node(key);
+        //while we have numbers, we continue executing filling the tree
+        while (!numbers.isEmpty()) {
+
+            //whe point to the first node
+            Node first = treeCreator.topFront();
+
+            //we give him a left child and then we eliminate the first element in the number queue.
+            if (first.left == null) {
+                first.left = new Node(numbers.topFront());
+                numbers.popFront();
+            }
+            //we give him a right child and then we eliminate the first element in the number queue.
+            if (first.right == null) {
+                first.right = new Node(numbers.topFront());
+                numbers.popFront();
+            }
+            //then we enqueue our sons for giving them sons too.
+            treeCreator.pushBack(first.left);
+            treeCreator.pushBack(first.right);
+            //we eliminate the first element in the node queue in order to continue filling our levels.
+            treeCreator.popFront();
+
         }
 
-        if (root.right == null) {
-            root.right = new Node(key);
-
-        }
-
-        return root;
+        return node;
 
     }
 
-    public void levelOrderQueue (int [] integerQueue, Node root){
+    private String inOrderString(Node root) {
 
+        String finalResult = "";
+        if (root.left != null) {
+            finalResult += inOrderString(root.left);
+        }
+
+        String result = root.data + " ";
+        finalResult += result;
+
+        if (root.right != null) {
+            finalResult += inOrderString(root.right);
+        }
+
+        return finalResult;
     }
+
+    public void inOrderStringDriver() {
+        System.out.println(inOrderString(this.root));
+    }
+
+    private String postOrderString(Node root) {
+
+        String result = "";
+
+        if (root.left != null) {
+            result += postOrderString(root.left);
+        }
+
+        if (root.right != null) {
+            result += postOrderString(root.right);
+        }
+
+        result += root.data + " ";
+
+        return result;
+    }
+
+    public void postOrderStringDriver() {
+        System.out.println(postOrderString(this.root));
+    }
+
+
+    private String preOrderString(Node root) {
+
+
+        String finalResult = root.data + " ";
+
+        if (root.left != null) {
+            finalResult += preOrderString(root.left);
+        }
+
+        if (root.right != null) {
+            finalResult += preOrderString(root.right);
+        }
+
+        return finalResult;
+    }
+
+
+    public void preOrderStringDriver() {
+        System.out.println(preOrderString(this.root));
+    }
+
+
 }

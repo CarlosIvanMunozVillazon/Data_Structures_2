@@ -52,6 +52,18 @@ public class LinkedListWithTail<T> {
 
     //Write pushFront(); pending
 
+    public void pushFront(T data){
+        Node<T> newNode = new Node<>(data);
+
+        if(isEmpty()){
+            this.head = newNode;
+            this.tail = newNode;
+        }else{
+            newNode.next = this.head;
+            this.head = newNode;
+        }
+    }
+
     public T topFront() {
         if (isEmpty()) {
             throw new RuntimeException("The linked list is empty.");

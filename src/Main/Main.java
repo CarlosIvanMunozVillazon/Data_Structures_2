@@ -46,7 +46,7 @@ public class Main {
         newAVL.printInOrder();*/
 
         //rotations testing
-
+/*
         newAVL.insertData(32);
         newAVL.insertData(20);
         newAVL.insertData(27);
@@ -57,8 +57,6 @@ public class Main {
         newAVL.insertData(16);
 
 
-
-
         newAVL.insertData(60);
         newAVL.insertData(70);
         newAVL.insertData(55);
@@ -66,6 +64,7 @@ public class Main {
         newAVL.insertData(56);
         newAVL.insertData(65);
         newAVL.insertData(71);
+        newAVL.insertData(72);*/
 
  /*       newAVL.insertData(2);
         newAVL.insertData(1);
@@ -95,8 +94,24 @@ public class Main {
 //        newAVL.printPostOrder();
 
 
-        newAVL.leftRotation(32);
-        newAVL.printPostOrder();
+        int [] array = {4, 20, 10, -1, 16, 4, 0};
+
+        BinarySearchTree levelOrderTree = new BinarySearchTree(array);
+
+        levelOrderTree.printInOrder();
+        levelOrderTree.inOrderStringDriver();
+        System.out.println();
+
+        levelOrderTree.printPostOrder();
+        levelOrderTree.postOrderStringDriver();
+        System.out.println();
+
+        levelOrderTree.printPreOrder();
+        levelOrderTree.preOrderStringDriver();
+        System.out.println();
+//        levelOrderTree.inOrder2();
+//        newAVL.leftRotation(32);
+//        newAVL.printPostOrder();
 
 
 
@@ -358,4 +373,5 @@ public class Main {
 */
 
     }
+
 }

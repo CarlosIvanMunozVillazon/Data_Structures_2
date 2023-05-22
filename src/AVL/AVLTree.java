@@ -224,14 +224,15 @@ public class AVLTree {
                     referenceNode.left = newNode;
                 }
 
-                referenceNode.height = height(referenceNode);
-
+                /*referenceNode.height = height(referenceNode);
+                newNode.height = height(newNode);*/
                 this.size++;
             }
-
         } else {
             this.root = new Node(key); //this is how we insert the first node.
+            this.root.height = 1;
         }
+
 
     }
 
@@ -244,8 +245,8 @@ public class AVLTree {
 
         //For deleteing a node, we must find it
         Node referenceNode = find(key, root);
-
         if (referenceNode != null) {
+            Node parent = referenceNode.parent;
             if (referenceNode.data == key) { //if the element is in the tree, then we can delete it
 
                 if (referenceNode.left == null && referenceNode.right == null) { //if we want to delete a leaf.
@@ -287,6 +288,8 @@ public class AVLTree {
 
                 }
                 this.size--;
+                parent.height = height(parent);
+
             }
         } else {
             System.out.println("All the elements have been deleted.");
