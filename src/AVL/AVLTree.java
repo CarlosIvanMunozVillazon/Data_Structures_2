@@ -472,4 +472,39 @@ public class AVLTree {
 
     }
 
+    private int getRootDistance(Node node, Node root) {
+        if (node.parent == root) {
+            return 1;
+        } else {
+            return 1 + getRootDistance(node.parent, root);
+        }
+    }
+
+    private int getNodeDistance(Node node1, Node node2, Node root) {
+        try {
+            if ((node1.data < root.data && node2.data > root.data) || (node1.data > root.data && node2.data < root.data)) {
+                return getRootDistance(node1, root) + getRootDistance(node2, root);
+            } else if (node1.data < root.data && node2.data < root.data) {
+                return getNodeDistance(node1, node2, root.left);
+            } else {
+                return getNodeDistance(node1, node2, root.right);
+            }
+        } catch (Exception e) {
+            try {
+                return getRootDistance(node1, node2);
+            } catch (Exception a) {
+                return getRootDistance(node2, node1);
+            }
+        }
+
+    }
+
+    public int getKeyDistance(int key1, int key2) {
+        Node node1 = find(key1, this.root);
+        Node node2 = find(key2, this.root);
+
+        return getNodeDistance(node1, node2, this.root);
+
+    }
+
 }
