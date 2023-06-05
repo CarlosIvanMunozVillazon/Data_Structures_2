@@ -12,6 +12,7 @@ public class Main {
         String foodNumbers = escaner.nextLine();
         String neededFood = escaner.nextLine();
 
+        escaner.close();
         String [] foodNumbers2 = foodNumbers.split(" ");
         int neededFood2 = Integer.parseInt(neededFood);
 
@@ -32,7 +33,7 @@ public class Main {
         }
         System.out.println();
         snakePath.printLevelOrder();
-        escaner.close();
+
     }
 
 }

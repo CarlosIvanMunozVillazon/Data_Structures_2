@@ -310,8 +310,13 @@ public class BinarySearchTree {
             }
             //we give him a right child and then we eliminate the first element in the number queue.
             if (first.right == null) {
-                first.right = new Node(numbers.topFront());
-                numbers.popFront();
+                try {
+                    first.right = new Node(numbers.topFront());
+                    numbers.popFront();
+                } catch (Exception e) {
+                    first.right = null;
+                }
+
             }
             //then we enqueue our sons for giving them sons too.
             treeCreator.pushBack(first.left);
@@ -323,20 +328,21 @@ public class BinarySearchTree {
 
         return node;
 
+
     }
 
-    private int addArrayElements (int [] A, boolean isEven){
+    private int addArrayElements(int[] A, boolean isEven) {
         int sum = 0;
 
-        if (isEven){ //We skip the second element in the array
-            for (int i = 0; i < A.length; i++){ //we add only elements in even positions
-                if (i % 2 == 0){
+        if (isEven) { //We skip the second element in the array
+            for (int i = 0; i < A.length; i++) { //we add only elements in even positions
+                if (i % 2 == 0) {
                     sum += A[i];
                 }
             }
         } else { //We skip the first element in the array
-            for (int i = 0; i < A.length; i++){//we add only elements in odd positions
-                if (i % 2 != 0){
+            for (int i = 0; i < A.length; i++) {//we add only elements in odd positions
+                if (i % 2 != 0) {
                     sum += A[i];
                 }
             }
@@ -345,53 +351,49 @@ public class BinarySearchTree {
         return sum;
     }
 
-    private int snake (Node root){
+    private int snake(Node root) {
 
-        try {
-            int iterationCounter = 0;
-            int food = root.data;
-            LinkedListWithTail<Node> nodeQueue = new LinkedListWithTail<>();
 
-            nodeQueue.pushBack(root.left);
-            nodeQueue.pushBack(root.right);
+        int iterationCounter = 0;
+        int food = root.data;
+        LinkedListWithTail<Node> nodeQueue = new LinkedListWithTail<>();
 
-            while (!nodeQueue.isEmpty()) {
-                int [] levelArray = new int[nodeQueue.getSize()];
-                for (int i = 0; i < levelArray.length; i++){
-                    Node n = nodeQueue.topFront();
-                    levelArray[i] = n.data;
+        nodeQueue.pushBack(root.left);
+        nodeQueue.pushBack(root.right);
 
-                    if (n.left != null){
-                        nodeQueue.pushBack(n.left);
-                    }
+        while (!nodeQueue.isEmpty()) {
+            int[] levelArray = new int[nodeQueue.getSize()];
+            for (int i = 0; i < levelArray.length; i++) {
+                Node n = nodeQueue.topFront();
+                levelArray[i] = n.data;
 
-                    if (n.right != null){
-                        nodeQueue.pushBack(n.right);
-                    }
-
-                    nodeQueue.popFront();
+                if (n.left != null) {
+                    nodeQueue.pushBack(n.left);
                 }
 
-                if (iterationCounter % 2 == 0){
-                    food += addArrayElements(levelArray, true);
-                } else {
-                    food += addArrayElements(levelArray, false);
+                if (n.right != null) {
+                    nodeQueue.pushBack(n.right);
                 }
 
-                iterationCounter++;
-
+                nodeQueue.popFront();
             }
 
-            return food;
+            if (iterationCounter % 2 == 0) {
+                food += addArrayElements(levelArray, true);
+            } else {
+                food += addArrayElements(levelArray, false);
+            }
 
-        } catch (Exception e){
-            System.out.println(e.getMessage());
-            return -1;
+            iterationCounter++;
+
         }
+
+        return food;
+
 
     }
 
-    public int snakePathDriver (){
+    public int snakePathDriver() {
         return snake(this.root);
     }
 
