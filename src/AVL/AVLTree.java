@@ -1,7 +1,6 @@
 package AVL;
 
-import BST.BinarySearchTree;
-import LinkedLIstWithTail.LinkedListWithTail;
+import LinkedListWithTail.LinkedListWithTail;
 
 public class AVLTree {
 

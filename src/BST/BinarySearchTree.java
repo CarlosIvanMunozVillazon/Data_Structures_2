@@ -1,6 +1,6 @@
 package BST;
 
-import LinkedLIstWithTail.LinkedListWithTail;
+import LinkedListWithTail.LinkedListWithTail;
 
 public class BinarySearchTree {
 
@@ -96,7 +96,7 @@ public class BinarySearchTree {
     }
 
     private void levelOrder(Node root) {
-        LinkedListWithTail<Node> queue = new LinkedListWithTail<>(); //we need a queue for keeping track of the elements
+        LinkedListWithTail<Node> queue = new LinkedListWithTail<Node>(); //we need a queue for keeping track of the elements
         //e.i we "enqueue levels"
 
         queue.pushBack(root);//first we enqueue the root of our tree
@@ -287,9 +287,9 @@ public class BinarySearchTree {
         Node node = new Node(array[0]);//root of our tree
 
         // queue for keeping track of the numbers in the array.
-        LinkedListWithTail<Integer> numbers = new LinkedListWithTail<>();
+        LinkedListWithTail<Integer> numbers = new LinkedListWithTail<Integer>();
         // queue for filling the nodes' sons
-        LinkedListWithTail<Node> treeCreator = new LinkedListWithTail<>();
+        LinkedListWithTail<Node> treeCreator = new LinkedListWithTail<Node>();
         //first we set up the root of the tree, with the first element of the array.
         treeCreator.pushBack(node);
         //then we fill the queue with the numbers we want to have in the array.
@@ -356,7 +356,7 @@ public class BinarySearchTree {
 
         int iterationCounter = 0;
         int food = root.data;
-        LinkedListWithTail<Node> nodeQueue = new LinkedListWithTail<>();
+        LinkedListWithTail<Node> nodeQueue = new LinkedListWithTail<Node>();
 
         nodeQueue.pushBack(root.left);
         nodeQueue.pushBack(root.right);
@@ -456,6 +456,56 @@ public class BinarySearchTree {
 
     public String preOrderStringDriver() {
         return preOrderString(this.root);
+    }
+
+    private int addArrayElements2(int[] A) {
+        int sum = 0;
+
+        for (int j : A) { //we add only elements in even positions
+            sum += j;
+        }
+
+        return sum;
+    }
+
+    private int wisdomPath(Node root) { //so similar to the snake path exercise.
+
+        int max = 0;
+        LinkedListWithTail<Node> nodeQueue = new LinkedListWithTail<Node>();
+
+        nodeQueue.pushBack(root);
+
+        while (!nodeQueue.isEmpty()) {
+            int[] levelArray = new int[nodeQueue.getSize()];
+            for (int i = 0; i < levelArray.length; i++) {
+                Node n = nodeQueue.topFront();
+                levelArray[i] = n.data;
+
+                if (n.left != null) {
+                    nodeQueue.pushBack(n.left);
+                }
+
+                if (n.right != null) {
+                    nodeQueue.pushBack(n.right);
+                }
+
+                nodeQueue.popFront();
+            }
+
+            int levelSum = addArrayElements2(levelArray);
+
+            if (levelSum > max){
+                max = levelSum;
+            }
+
+        }
+
+        return max;
+
+    }
+
+    public int wisdomPathDriver (){
+        return wisdomPath(this.root);
     }
 
 

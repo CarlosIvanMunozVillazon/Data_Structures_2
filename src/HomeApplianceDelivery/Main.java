@@ -1,6 +1,6 @@
 package HomeApplianceDelivery;
 
-import LinkedLIstWithTail.LinkedListWithTail;
+import LinkedListWithTail.LinkedListWithTail;
 import StackWithArray.StackArray;
 
 import java.util.Scanner;
