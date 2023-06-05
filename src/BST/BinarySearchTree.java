@@ -325,6 +325,76 @@ public class BinarySearchTree {
 
     }
 
+    private int addArrayElements (int [] A, boolean isEven){
+        int sum = 0;
+
+        if (isEven){ //We skip the second element in the array
+            for (int i = 0; i < A.length; i++){ //we add only elements in even positions
+                if (i % 2 == 0){
+                    sum += A[i];
+                }
+            }
+        } else { //We skip the first element in the array
+            for (int i = 0; i < A.length; i++){//we add only elements in odd positions
+                if (i % 2 != 0){
+                    sum += A[i];
+                }
+            }
+        }
+
+        return sum;
+    }
+
+    private int snake (Node root){
+
+        try {
+            int iterationCounter = 0;
+            int food = root.data;
+            LinkedListWithTail<Node> nodeQueue = new LinkedListWithTail<>();
+
+            nodeQueue.pushBack(root.left);
+            nodeQueue.pushBack(root.right);
+
+            while (!nodeQueue.isEmpty()) {
+                int [] levelArray = new int[nodeQueue.getSize()];
+                for (int i = 0; i < levelArray.length; i++){
+                    Node n = nodeQueue.topFront();
+                    levelArray[i] = n.data;
+
+                    if (n.left != null){
+                        nodeQueue.pushBack(n.left);
+                    }
+
+                    if (n.right != null){
+                        nodeQueue.pushBack(n.right);
+                    }
+
+                    nodeQueue.popFront();
+                }
+
+                if (iterationCounter % 2 == 0){
+                    food += addArrayElements(levelArray, true);
+                } else {
+                    food += addArrayElements(levelArray, false);
+                }
+
+                iterationCounter++;
+
+            }
+
+            return food;
+
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            return -1;
+        }
+
+    }
+
+    public int snakePathDriver (){
+        return snake(this.root);
+    }
+
     private String inOrderString(Node root) {
 
         String finalResult = "";

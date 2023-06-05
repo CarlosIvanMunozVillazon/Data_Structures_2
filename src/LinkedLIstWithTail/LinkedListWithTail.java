@@ -21,6 +21,8 @@ public class LinkedListWithTail<T> {
     private Node<T> head;
     private Node<T> tail;
 
+    private int size;
+
     public LinkedListWithTail() {
         this.head = null;
         this.tail = null;
@@ -38,6 +40,7 @@ public class LinkedListWithTail<T> {
             tail.next = newNode;
         }
         tail = newNode;
+        this.size++;
     }
 
     public T topBack() {
@@ -62,6 +65,8 @@ public class LinkedListWithTail<T> {
             newNode.next = this.head;
             this.head = newNode;
         }
+
+        this.size++;
     }
 
     public T topFront() {
@@ -82,6 +87,8 @@ public class LinkedListWithTail<T> {
         } else {
             head = head.next;
         }
+
+        this.size--;
     }
 
     public void printLinkedListWithTail() {
@@ -94,5 +101,9 @@ public class LinkedListWithTail<T> {
         }
 
         System.out.println();
+    }
+
+    public int getSize() {
+        return size;
     }
 }
